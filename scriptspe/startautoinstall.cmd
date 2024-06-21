@@ -5,12 +5,20 @@ echo 暂时无人使用请输入0
 set user=temp
 set /p user=
 if "%user%" equ "0" (set user=temp)
+set fullname=%user%
+if "%user%" neq "temp" (
+	echo 请输入此用户的显示名称
+	echo 直接显示用户名请输入0
+	set /p fullname=
+	if "%fullname%" equ "0" (set fullname=%user%)
+)
 echo 如需自动分区，请输入y
 set partconfirm=none
 set /p partconfirm=
 if /i "%partconfirm%" neq "y" (set partconfirm=n)
 mkdir %SystemRoot%\download
 echo %user%>%SystemRoot%\download\user.txt
+echo %fullname%>>%SystemRoot%\download\user.txt
 echo %partconfirm%>%SystemRoot%\download\partconfirm.txt
 set address=192.168.5.1
 curl -s -o %SystemRoot%\work.cmd http://%address%/autoinstallwindows/scriptspe/autoinstallwork.cmd

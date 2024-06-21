@@ -1,7 +1,10 @@
 @REM @echo off
 start /min c:\download\scripts\disablenetwork.cmd
+for /f "skip=1 tokens=1 delims=," %%a in ('type c:\download\user.txt') do set fullname=%%a&goto fullnameend
+:fullnameend
 net user %username% temp@123.com
 wmic useraccount where name="%username%" Set PasswordExpires="false"
+net user %username% /fullname:"%fullname%"
 set hostname=none
 for /f "tokens=1 delims=," %%a in ('type c:\download\hostname.txt') do set hostname=%%a&goto hostnameend
 :hostnameend
