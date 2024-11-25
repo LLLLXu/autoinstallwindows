@@ -14,4 +14,5 @@ pnputil /add-driver c:\download\driver\2\*.inf /install /subdirs
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultPassword /t reg_sz /d "temp@123.com" /f
 @REM wmic computersystem where "name='%computername%'" call rename "%hostname%"
 wmic computersystem where name="%computername%" call rename "%hostname%"
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer" /V DisableSearchBoxSuggestions /t reg_dword /d "0x00000001" /f
 shutdown /r /t 1
