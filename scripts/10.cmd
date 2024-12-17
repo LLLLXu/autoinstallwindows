@@ -13,7 +13,13 @@ pnputil /add-driver c:\download\driver\2\*.inf /install /subdirs
 @REM reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoAdminLogon /t reg_sz /d "1" /f
 @REM reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultUserName /t reg_sz /d "%USER%" /f
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultPassword /t reg_sz /d "temp@123.com" /f
-wmic computersystem where name="%computername%" call rename "%hostname%"
+
+@REM wmic computersystem where name="%computername%" call rename "%hostname%"
 @REM powershell Rename-Computer -NewName "%hostname%" -Force -PassThru
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\ComputerName\ComputerName" /v ComputerName /t reg_sz /d "%hostname%" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Tcpip\Parameters" /v "NV Hostname" /t reg_sz /d "%hostname%" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\ComputerName\ComputerName" /v ComputerName /t reg_sz /d "%hostname%" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "NV Hostname" /t reg_sz /d "%hostname%" /f
+
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer" /V DisableSearchBoxSuggestions /t reg_dword /d "0x00000001" /f
 shutdown /r /t 1
