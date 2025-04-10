@@ -27,6 +27,8 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v Dis
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe" /v BlockedOobeUpdaters /t reg_sz /d \"MS_Outlook\" /f
 powershell Remove-AppxProvisionedPackage -AllUsers -Online -PackageName (Get-AppxPackage Microsoft.OutlookForWindows).PackageFullName
 
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft NT\Terminal Services\Client" /v fClientDisableUDP /t reg_dword /d "0x00000001" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v RequireSecuritySignature /t reg_dword /d "0x00000000" /f
+
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services\Client" /v fClientDisableUDP /t reg_dword /d "0x00000001" /f
 
 shutdown /r /t 1
