@@ -20,7 +20,7 @@ mkdir %SystemRoot%\download
 echo %user%>%SystemRoot%\download\user.txt
 echo %fullname%>>%SystemRoot%\download\user.txt
 echo %partconfirm%>%SystemRoot%\download\partconfirm.txt
-set address=192.168.5.1
+set address=pxe.9th-tech.com
 curl -s -o %SystemRoot%\work.cmd http://%address%/autoinstallwindows/scriptspe/autoinstallwork.cmd
 :setipc
 net use \\%address%\ipc$ "anonymous" /user:"anonymous" 2>nul
